@@ -5,7 +5,7 @@ terraform {
     region = "ap-northeast-2"
 
     bucket  = "squaaat-terraform-state"
-    key     = "current/development/cognito"
+    key     = "current/development/cognito_user_pool"
     encrypt = true
 
     dynamodb_table = "squaaat-terraform-lock"
