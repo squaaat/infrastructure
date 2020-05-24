@@ -5,7 +5,7 @@ locals {
   stage  = "alpha"
   region = data.aws_region.current.name
 
-  user_pool_id = "${local.region}_AiZyAaWOC" # user_pool_id
+  user_pool_id = "${local.region}_${var.alpha_cognito_user_pool_id}" # user_pool_id
 
   google_client_id     = var.google_client_id
   google_client_secret = var.google_client_secret
@@ -27,5 +27,4 @@ module "squaaat" {
 
   facebook_client_id     = local.facebook_client_id
   facebook_client_secret = local.facebook_client_secret
-
 }
