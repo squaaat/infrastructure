@@ -1,4 +1,22 @@
+# AWS Secrets keys
 export AWS_REGION=ap-northeast-2
 export AWS_DEFAULT_REGION=ap-northeast-2
-export AWS_ACCESS_KEY_ID=
-export AWS_SECRET_ACCESS_KEY=
+export AWS_ACCESS_KEY_ID="****"
+export AWS_SECRET_ACCESS_KEY="*****"
+
+# google oauth keys
+export GOOGLE_OAUTH_CLIENT_ID="********.apps.googleusercontent.com"
+export GOOGLE_OAUTH_CLIENT_SECRET="***********"
+export GOOGLE_PROJECT=squaaat
+
+# Facebook oauth keys
+export FACEBOOK_OAUTH_CLIENT_ID="******"
+export FACEBOOK_OAUTH_CLIENT_SECRET="*********"
+export FACEBOOK_PROJECT=squaaat
+
+# terraform var
+export TF_VAR_google_client_id=$GOOGLE_OAUTH_CLIENT_ID
+export TF_VAR_google_client_secret=$GOOGLE_OAUTH_CLIENT_SECRET
+
+export TF_VAR_facebook_client_id=$FACEBOOK_OAUTH_CLIENT_ID
+export TF_VAR_facebook_client_secret=$FACEBOOK_OAUTH_CLIENT_SECRET
