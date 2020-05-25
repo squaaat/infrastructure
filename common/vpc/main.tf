@@ -1,5 +1,5 @@
 locals {
-  cidr_block = "10.128.0.0/28"
+  cidr_block = "10.128.0.0/16"
   name       = "squaaat"
 
   vpc_tags = map(
@@ -57,5 +57,4 @@ resource "aws_security_group" "basic" {
   #   protocol    = -1
   #   cidr_blocks = ["${var.peering_cidrs}"]
   # }
-
 }
