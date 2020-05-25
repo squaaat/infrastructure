@@ -1,17 +1,18 @@
 resource "aws_launch_template" "ec2" {
-  name_prefix   = var.name
+  name_prefix   = "${var.service}-${var.role}-${var.env}"
   image_id      = var.ami_id
   instance_type = var.instance_type
   ebs_optimized = false
   user_data     = base64encode(data.template_file.ec2.rendered)
 
+  key_name = var.key_name
   monitoring {
     enabled = false
   }
 
   network_interfaces {
-    associate_public_ip_address = false
-    # security_groups             = [var.vpc_default_sg]
+    associate_public_ip_address = var.associate_public_ip_address
+    security_groups             = var.security_groups
   }
 
   block_device_mappings {
@@ -26,13 +27,13 @@ resource "aws_launch_template" "ec2" {
 }
 
 resource "aws_autoscaling_group" "ec2" {
-  name = var.name
+  name = "${var.service}-${var.role}-${var.env}"
 
-  # availability_zones  = var.availability_zones
-  # vpc_zone_identifier = var.subnet_ids
-  max_size         = var.max_size
-  min_size         = var.min_size
-  desired_capacity = var.desired_capacity
+  availability_zones  = var.availability_zones
+  vpc_zone_identifier = var.vpc_zone_identifier
+  max_size            = var.max_size
+  min_size            = var.min_size
+  desired_capacity    = var.desired_capacity
 
   enabled_metrics = [
     "GroupMinSize",
@@ -57,4 +58,28 @@ resource "aws_autoscaling_group" "ec2" {
   default_cooldown          = 900
   termination_policies      = ["OldestLaunchConfiguration", "OldestInstance"]
   suspended_processes       = ["ReplaceUnhealthy"]
+
+  tag {
+    key                 = "Name"
+    value               = "${var.service}-${var.role}-${var.env}"
+    propagate_at_launch = "true"
+  }
+
+  tag {
+    key                 = "Service"
+    value               = var.service
+    propagate_at_launch = "true"
+  }
+
+  tag {
+    key                 = "Environment"
+    value               = var.env
+    propagate_at_launch = "true"
+  }
+
+  tag {
+    key                 = "Role"
+    value               = var.role
+    propagate_at_launch = "true"
+  }
 }

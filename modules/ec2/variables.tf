@@ -1,7 +1,3 @@
-variable "name" {
-  type = string
-}
-
 variable "ami_id" {
   type = string
 }
@@ -30,3 +26,35 @@ variable "github_accounts" {
   type = string
 }
 
+variable "availability_zones" {
+  type = list
+}
+
+variable "vpc_zone_identifier" {
+  type = list
+}
+
+variable "security_groups" {
+  type = list
+}
+
+variable "associate_public_ip_address" {
+  default = false
+  type    = bool
+}
+
+variable "key_name" {
+  type = string
+}
+
+variable "service" {
+  type = string
+}
+
+variable "role" {
+  type = string
+}
+
+variable "env" {
+  type = string
+}

@@ -1,7 +1,21 @@
-locals {
-  name = "bastion"
+data "terraform_remote_state" "common" {
+  backend = "s3"
 
-  ami_id        = "ami-043c433281309b3d5" # bastion 2020-05-23 1824
+  config = {
+    bucket  = "squaaat-terraform-state"
+    key     = "current/common"
+    region  = "ap-northeast-2"
+    encrypt = true
+  }
+}
+
+locals {
+  service  = "squaaat"
+  role     = "bastion"
+  env      = "common"
+  key_name = "drakejin"
+
+  ami_id        = "ami-0e5342bbda4dc819b" # bastion 2020-05-25 1025
   instance_type = "t3.small"
   volume_size   = 20
 
@@ -13,9 +27,13 @@ locals {
 }
 
 module "bastion" {
-  source = "../../modules/ec2"
+  source          = "../../modules/ec2"
+  github_accounts = local.github_accounts
 
-  name = local.name
+  service  = local.service
+  role     = local.role
+  env      = local.env
+  key_name = local.key_name
 
   ami_id        = local.ami_id
   instance_type = local.instance_type
@@ -25,6 +43,21 @@ module "bastion" {
   min_size         = local.min_size
   desired_capacity = local.desired_capacity
 
+  availability_zones = [
+    data.terraform_remote_state.common.outputs.az_zones[0],
+    data.terraform_remote_state.common.outputs.az_zones[1],
+    data.terraform_remote_state.common.outputs.az_zones[2]
+  ]
 
-  github_accounts = local.github_accounts
+  vpc_zone_identifier = [
+    data.terraform_remote_state.common.outputs.subnet_public_an2a_id,
+    data.terraform_remote_state.common.outputs.subnet_public_an2b_id,
+    data.terraform_remote_state.common.outputs.subnet_public_an2c_id
+  ]
+
+  security_groups = [
+    data.terraform_remote_state.common.outputs.sg_basic
+  ]
+  associate_public_ip_address = true
+
 }
