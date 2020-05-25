@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "context" {
-  bucket = "squaaat-context"
+  bucket = "squaaat-secrets"
   acl    = "private"
 
   versioning {
