@@ -15,7 +15,7 @@ locals {
   env      = "common"
   key_name = "drakejin"
 
-  ami_id        = "ami-0e5342bbda4dc819b" # bastion 2020-05-25 1025
+  ami_id        = "ami-087451feec8ea8919" # bastion 2020-05-25 1308
   instance_type = "t3.small"
   volume_size   = 20
 
@@ -60,4 +60,5 @@ module "bastion" {
   ]
   associate_public_ip_address = true
 
+  iam_instance_profile_name = aws_iam_instance_profile.profile.name
 }
