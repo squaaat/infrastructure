@@ -5,7 +5,7 @@ terraform {
     region = "ap-northeast-2"
 
     bucket  = "squaaat-terraform-state"
-    key     = "current/common"
+    key     = "current/development/bastion"
     encrypt = true
 
     dynamodb_table = "squaaat-terraform-lock"
