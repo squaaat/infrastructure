@@ -58,3 +58,8 @@ variable "role" {
 variable "env" {
   type = string
 }
+
+variable "iam_instance_profile_name" {
+  default = ""
+  type    = string
+}

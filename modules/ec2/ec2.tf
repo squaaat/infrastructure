@@ -6,13 +6,19 @@ resource "aws_launch_template" "ec2" {
   user_data     = base64encode(data.template_file.ec2.rendered)
 
   key_name = var.key_name
+
   monitoring {
     enabled = false
+  }
+
+  iam_instance_profile {
+    name = var.iam_instance_profile_name
   }
 
   network_interfaces {
     associate_public_ip_address = var.associate_public_ip_address
     security_groups             = var.security_groups
+    delete_on_termination       = true
   }
 
   block_device_mappings {
