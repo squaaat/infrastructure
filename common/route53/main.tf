@@ -1,14 +1,3 @@
-data "terraform_remote_state" "common" {
-  backend = "s3"
-
-  config = {
-    bucket  = "squaaat-terraform-state"
-    key     = "current/common"
-    region  = "ap-northeast-2"
-    encrypt = true
-  }
-}
-
 # squaaat.com
 resource "aws_route53_zone" "squaaat_com" {
   name = "squaaat.com"
