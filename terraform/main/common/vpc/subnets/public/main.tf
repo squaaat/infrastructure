@@ -15,7 +15,7 @@ locals {
 
   meta = {
     publish  = "public",
-    crew     = "pickstudio",
+    crew     = "squaaat",
     team     = "platform",
     resource = "subnet"
   }
@@ -32,10 +32,10 @@ module "public_a" {
   meta        = local.meta
 }
 
-module "public_d" {
+module "public_b" {
   source = "../../../../../modules/vpc/subnets/public"
 
-  az                     = local.zone.d
+  az                     = local.zone.b
   subnet_ipv4_cidr_block = "${substr(local.vpc.ipv4_cidr_block, 0, 6)}.6.0/23"
 
   vpc_id      = local.vpc.id

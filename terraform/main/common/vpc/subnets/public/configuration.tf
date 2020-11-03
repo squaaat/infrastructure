@@ -1,20 +1,20 @@
 terraform {
-  required_version = "= 0.13.2"
+  required_version = "= 0.13.5"
 
   backend "s3" {
     region = "ap-northeast-2"
 
-    bucket = "pickstudio-infrastructure"
-    key    = "terraform/v1/common/vpc/subnets/private_nat"
+    bucket = "squaaat-infrastructure"
+    key    = "terraform/v1/common/vpc/subnets/public"
 
     encrypt = true
 
-    dynamodb_table = "pickstudio-terraform-lock"
+    dynamodb_table = "squaaat-terraform-lock"
   }
 }
 
 provider "aws" {
-  version = "3.5.0"
+  version = "3.13.0"
   region  = "ap-northeast-2"
 }
 
@@ -22,20 +22,8 @@ data "terraform_remote_state" "common_vpc" {
   backend = "s3"
 
   config = {
-    bucket = "pickstudio-infrastructure"
+    bucket = "squaaat-infrastructure"
     key     = "terraform/v1/common/vpc"
-    region  = "ap-northeast-2"
-    encrypt = true
-  }
-}
-
-
-data "terraform_remote_state" "common_subnets_public" {
-  backend = "s3"
-
-  config = {
-    bucket = "pickstudio-infrastructure"
-    key     = "terraform/v1/common/vpc/subnets/public"
     region  = "ap-northeast-2"
     encrypt = true
   }

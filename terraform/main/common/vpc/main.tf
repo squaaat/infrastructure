@@ -1,6 +1,6 @@
 locals {
   meta = {
-    crew     = "pickstudio",
+    crew     = "squaaat",
     team     = "platform",
     resource = "VPC"
   }
@@ -8,7 +8,7 @@ locals {
   cidr_block = "10.128.0.0/16"
 }
 
-resource "aws_vpc" "pickstudio" {
+resource "aws_vpc" "squaaat" {
   cidr_block = local.cidr_block
 
   assign_generated_ipv6_cidr_block = true
@@ -23,8 +23,8 @@ resource "aws_vpc" "pickstudio" {
   }
 }
 
-resource "aws_internet_gateway" "pickstudio" {
-  vpc_id = aws_vpc.pickstudio.id
+resource "aws_internet_gateway" "squaaat" {
+  vpc_id = aws_vpc.squaaat.id
 
   tags = {
     Name = "${local.meta.crew}-igw"
@@ -33,8 +33,8 @@ resource "aws_internet_gateway" "pickstudio" {
 
 resource "aws_security_group" "members" {
   name        = "members"
-  description = "access for pickstudio crews"
-  vpc_id      = aws_vpc.pickstudio.id
+  description = "access for squaaat crews"
+  vpc_id      = aws_vpc.squaaat.id
 
   ingress {
     from_port = 0
@@ -54,7 +54,7 @@ resource "aws_security_group" "members" {
 resource "aws_security_group" "basic" {
   name        = "basic"
   description = "default security_group"
-  vpc_id      = aws_vpc.pickstudio.id
+  vpc_id      = aws_vpc.squaaat.id
 
   ingress {
     from_port = 0

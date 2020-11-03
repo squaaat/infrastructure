@@ -14,5 +14,5 @@ variable "meta" {
 
 variable "vpc_id" {
   type = string
-  description = "get pickstudio VPC id"
+  description = "get squaaat VPC id"
 }
