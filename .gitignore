@@ -1,5 +1,7 @@
 .envrc
 .terraform
+.terraform.lock.hcl
+
 *.pem
 
 .idea

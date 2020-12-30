@@ -4,9 +4,9 @@ terraform code about squaaat cloud infrastructure
 
 # Requirements
 
-- `tfenv` (using terraform 0.12.24)
-- AWS access, secret key. Plz, refer to `.envrc.example`
 - `direnv` cli
+- `tfenv` (using terraform 0.14.3)
+- AWS access, secret key. Plz, refer to `.envrc.example`
 
 # getting start
 
