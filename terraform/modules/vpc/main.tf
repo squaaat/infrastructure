@@ -6,7 +6,7 @@ resource "aws_vpc" "squaaat" {
   enable_dns_hostnames = true
   instance_tenancy     = "default"
   tags = {
-    Team     = var.meta.team,
+    Team = var.meta.team,
   }
 }
 
