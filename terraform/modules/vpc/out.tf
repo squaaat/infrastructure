@@ -38,3 +38,11 @@ output "sg_members_id" {
 output "igw_main_id" {
   value = aws_internet_gateway.squaaat.id
 }
+
+output "subnet_public" {
+  value = module.subnet_public
+}
+
+output "subnet_private" {
+  value = module.subnet_private
+}
