@@ -6,10 +6,16 @@ variable "zone_id" {
   type = string
 }
 
+variable "prov" {
+  default = "aws"
+  type = string
+}
+
 resource "aws_acm_certificate" "cert" {
   domain_name       = var.domain_name
   validation_method = "DNS"
 
+  provider = var.prov
   tags = {
     Environment = "test"
   }

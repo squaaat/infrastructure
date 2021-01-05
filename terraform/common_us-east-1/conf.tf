@@ -9,29 +9,24 @@ terraform {
 
   backend "s3" {
     bucket         = "squaaat-infrastructure"
-    key            = "terraform/common"
+    key            = "terraform/common_us-east-1"
     region         = "ap-northeast-2"
-    encrypt        = true
     dynamodb_table = "squaaat-terraform-lock"
+    encrypt        = true
+  }
+}
+
+data "terraform_remote_state" "common" {
+  backend = "s3"
+
+  config = {
+    bucket  = "squaaat-infrastructure"
+    key     = "terraform/common"
+    region  = "ap-northeast-2"
+    encrypt = true
   }
 }
 
 provider "aws" {
-  region = "ap-northeast-2"
-}
-
-data "aws_availability_zone" "a" {
-  name = "ap-northeast-2a"
-}
-
-data "aws_availability_zone" "b" {
-  name = "ap-northeast-2b"
-}
-
-data "aws_availability_zone" "c" {
-  name = "ap-northeast-2c"
-}
-
-data "aws_availability_zone" "d" {
-  name = "ap-northeast-2d"
+  region = "us-east-1"
 }
