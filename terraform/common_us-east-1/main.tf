@@ -33,23 +33,6 @@ module "acm_squaaat_sub" {
   domain_name = "*.squaaat.com"
 }
 
-
-module "acm_squaaat_root_us_east_1" {
-  source = "../modules/acm"
-
-  zone_id = module.route53_zone.zone_id
-  domain_name = "squaaat.com"
-  prov = "aws.useast1"
-}
-
-module "acm_squaaat_sub_us_east_1" {
-  source = "../modules/acm"
-
-  zone_id = module.route53_zone.zone_id
-  domain_name = "*.squaaat.com"
-  prov = "aws.useast1"
-}
-
 module "route53_record_github_validation" {
   source = "../modules/route53_record"
 
