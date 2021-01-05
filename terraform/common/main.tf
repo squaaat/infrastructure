@@ -19,16 +19,18 @@ module "route53_zone" {
   zone_name = "squaaat.com"
 }
 
-module "route53_record_acm_validation" {
-  source = "../modules/route53_record"
+module "acm_squaaat_root" {
+  source = "../modules/acm"
 
   zone_id = module.route53_zone.zone_id
-  domain = "_4fca4868e4a0e835bd025bc79e1e7591.${module.route53_zone.zone_name}"
-  type = "CNAME"
-  ttl = "300"
-  records = [
-    "_a2f763f21db728b89d13635d502a928c.auiqqraehs.acm-validations.aws."
-  ]
+  domain_name = "squaaat.com"
+}
+
+module "acm_squaaat_sub" {
+  source = "../modules/acm"
+
+  zone_id = module.route53_zone.zone_id
+  domain_name = "*.squaaat.com"
 }
 
 module "route53_record_github_validation" {
@@ -41,14 +43,6 @@ module "route53_record_github_validation" {
   records = [
     "f85cb7b730",
   ]
-}
-
-data "aws_availability_zone" "a" {
-  name = "ap-northeast-2a"
-}
-
-variable "db_password" {
-  type = string
 }
 
 module "rds" {

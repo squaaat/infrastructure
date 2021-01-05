@@ -19,3 +19,19 @@ terraform {
 provider "aws" {
   region = "ap-northeast-2"
 }
+
+data "aws_availability_zone" "a" {
+  name = "ap-northeast-2a"
+}
+
+data "aws_availability_zone" "b" {
+  name = "ap-northeast-2b"
+}
+
+data "aws_availability_zone" "c" {
+  name = "ap-northeast-2c"
+}
+
+data "aws_availability_zone" "d" {
+  name = "ap-northeast-2d"
+}
