@@ -39,10 +39,17 @@ output "igw_main_id" {
   value = aws_internet_gateway.squaaat.id
 }
 
-output "subnet_public" {
-  value = module.subnet_public
+output "subnet_public_a_id" {
+  value = module.subnet_public["a"].subnet_id
 }
 
-output "subnet_private" {
-  value = module.subnet_private
+output "subnet_public_b_id" {
+  value = module.subnet_public["b"].subnet_id
+}
+
+output "subnet_private_a_id" {
+  value = module.subnet_private["a"].subnet_id
+}
+output "subnet_private_b_id" {
+  value = module.subnet_private["b"].subnet_id
 }

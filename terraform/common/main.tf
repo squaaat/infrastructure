@@ -1,6 +1,8 @@
 locals {
   meta = {
     team = "squaaat"
+    service = "squaaat"
+    env = "alpha"
   }
 }
 
@@ -16,7 +18,6 @@ module "route53_zone" {
 
   zone_name = "squaaat.com"
 }
-
 
 module "route53_record_acm_validation" {
   source = "../modules/route53_record"
@@ -40,4 +41,36 @@ module "route53_record_github_validation" {
   records = [
     "f85cb7b730",
   ]
+}
+
+data "aws_availability_zone" "a" {
+  name = "ap-northeast-2a"
+}
+
+variable "db_password" {
+  type = string
+}
+
+module "rds" {
+  source = "../modules/rds_instance"
+
+  meta = local.meta
+  vpc_id = module.vpc.vpc_id
+  sg_ids = [module.vpc.sg_basic_id]
+  subnet_ids = [
+    module.vpc.subnet_public_a_id,
+    module.vpc.subnet_public_b_id,
+  ]
+
+  db_password = var.db_password
+  db_meta = {
+    az = data.aws_availability_zone.a.name,
+    engine = "mysql"
+    engine_version        = "8.0.20"
+    instance_class        = "db.t2.micro"
+    volume_size = 20
+    maximum_volume_size = 100
+    dbname = "squaaat"
+    username = "grandcanyon"
+  }
 }

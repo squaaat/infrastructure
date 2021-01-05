@@ -18,3 +18,7 @@ output "route53_records" {
     )
   )
 }
+
+output "db" {
+  value = module.rds
+}
