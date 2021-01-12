@@ -20,11 +20,6 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
-provider "aws" {
-  alias  = "useast1"
-  region = "us-east-1"
-}
-
 data "aws_availability_zone" "a" {
   name = "ap-northeast-2a"
 }

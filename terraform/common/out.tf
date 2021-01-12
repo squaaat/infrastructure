@@ -10,20 +10,6 @@ output "route53_zone" {
   value = module.route53_zone
 }
 
-output "acm_squaaat_root" {
-  value = {
-    arn = module.acm_squaaat_root.acm.arn
-    id = module.acm_squaaat_root.acm.id
-  }
-}
-
-output "acm_squaaat_sub" {
-  value = {
-    arn = module.acm_squaaat_sub.acm.arn
-    id = module.acm_squaaat_sub.acm.id
-  }
-}
-
 output "route53_records" {
   value = zipmap(
     list(
@@ -39,4 +25,11 @@ output "db" {
   value = module.rds
 }
 
-
+output "s3_lambda" {
+  value = {
+    id = aws_s3_bucket.squaaat.id,
+    arn = aws_s3_bucket.squaaat.arn,
+    name = aws_s3_bucket.squaaat.bucket,
+    domain_name = aws_s3_bucket.squaaat.bucket_domain_name,
+  }
+}
